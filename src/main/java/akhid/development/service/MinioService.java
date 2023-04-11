@@ -72,7 +72,7 @@ public class MinioService {
         return result;
     }
 
-    public List<?> getAllFiles(){
+    public List<String> getAllFiles(){
         Iterable<Result<Item>> results = minioClient.listObjects(ListObjectsArgs.builder().bucket(s3ConfigProperties.bucket()).build());
         List<String> resultToList = new ArrayList<>();
 
@@ -109,7 +109,7 @@ public class MinioService {
         Files.write(Paths.get(fileName), bytes, StandardOpenOption.CREATE_NEW);
     }
 
-    public void writeCloudFile(String id, InputStream isFile) {
+    private void writeCloudFile(String id, InputStream isFile) {
         try {
             var object = PutObjectArgs.builder()
                     .object(id)
